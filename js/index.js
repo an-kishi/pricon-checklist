@@ -2,8 +2,8 @@
 var icontype = ".png";
 var icondefault = "default.png";
 var icondefault_external_source = false;
-var datapath = "data/servants.json";
-var img_path = "img/servants/";
+var datapath = "data/characters.json";
+var img_path = "img/characters/";
 var img_class = "img-fluid";
 var image_host = "https://i.imgur.com/";
 var member_class_grid = "col-1 member-outer";
@@ -12,20 +12,22 @@ var member_class_checked = "member-checked";
 var capture_area = "capturearea";
 var box_fake_subfix = "Fake";
 
-var morecopy_text = "NP";
+var unique_prefix = "uq_";
+var unique_class = "member-uniquewp";
+var morecopy_text = "★";
 var morecopy_class = "member-np";
 var morecopy_prefix = "np_";
 var copy_choice_allow = [
-	{ "id": 1, "text": "NP1" },
-	{ "id": 2, "text": "NP2" },
-	{ "id": 3, "text": "NP3" },
-	{ "id": 4, "text": "NP4" },
-	{ "id": 5, "text": "NP5" }
+	{ "id": 1, "text": "★" },
+	{ "id": 2, "text": "★★" },
+	{ "id": 3, "text": "★★★" },
+	{ "id": 4, "text": "★★★★" },
+	{ "id": 5, "text": "★★★★★" }
 ];
 var copy_choice_default = 1;
 var copy_choice_max = 5;
-var share_tags = "FGO,FateGrandOrder";
-var share_title = "See My Servants Here!!";
+var share_tags = "PCON,Princess Connect Re:Dive";
+var share_title = "See My Characters Here!!";
 
 // Servant Type
 var servant_type_box_class = "member-type";
@@ -37,11 +39,11 @@ var sevent_typelist = [
 ];
 
 // Confirm
-var member_uncheck_conf = "Are you sure you want to uncheck this servant?";
-var member_clear_conf = "Are you sure you want to clear all checked servants?";
+var member_uncheck_conf = "Are you sure you want to uncheck this characters?";
+var member_clear_conf = "Are you sure you want to clear all checked characters?";
 
 // Share
-var share_text = "This is your current shorted URL. Can't guarantee how long the shorted URL will last (Use free data storage service 😜).<br/>So please keep Full URL in a safe place (Bookmark, ETC.)."
+var share_text = "This is your current shorted URL. Can't guarantee how long the shorted URL will last (Use free data storage service).<br/>So please keep Full URL in a safe place (Bookmark, ETC.)."
 
 // Statistic
 var statistic_area = "statisticBox";
@@ -54,13 +56,13 @@ var fastmode_checkbox = "fastmode";
 var fastmode_parameter = "fast";
 
 // URL Shortend
-var endpoint = "https://www.jsonstore.io/b79c0c8ea773aa05abd64a356b925c88703d6cbb40679791533b716810e77dc9";
+var endpoint = "https://www.jsonstore.io/d8d0a755e33a5345fb388348417b24eb1acfd8fbd97a5904dd0f78e8bd48721a";
 var url_checkback_part = "/checkback/";
 var url_data_part = "/data/";
 
 // Save & Load
-var fast_mode_local = "fgo_fastmode";
-var list_local = "fgo_list";
+var fast_mode_local = "pcon_fastmode";
+var list_local = "pcon_list";
 
 var load_text = "List Data found on your current browser. Would you like to load it?";
 var save_text = "Would you like to save current list data? This will overwrite the old data if exist.";
@@ -74,6 +76,7 @@ var save_btn = "savebutton";
 // Global Variables
 var servants_data_list = {};
 var user_data = {};
+var user_unique_data = {};
 var rarity_count_data = {
 	"allcount": {
 		"max": 0,
@@ -87,6 +90,7 @@ var rarity_count_data = {
 	}
 };
 var raw_user_input = "";
+var raw_user_input_unique = "";
 var compress_input = "";
 var current_edit = "";
 
@@ -142,10 +146,11 @@ function loadSprite(src) {
 }
 
 // Select2 Source for lower
-function getNewCopySource(current_max, s_list) {
-	if (current_max < copy_choice_max && current_max > 0) {
+function getNewCopySource(current_max, s_list, current_min) {
+	/* Backup old getNewCopySource
+	if (current_max < copy_choice_max && current_max > current_min) {
 		var new_choice_allow = [];
-		for (var i = 0; i < copy_choice_allow.length; i++) {
+		for (var i = current_min-1; i < copy_choice_allow.length; i++) {
 			if (copy_choice_allow[i].id <= current_max) {
 				new_choice_allow.push(copy_choice_allow[i]);
 			}
@@ -154,10 +159,22 @@ function getNewCopySource(current_max, s_list) {
 			}
 		}
 		s_list.data('select2').dataAdapter.updateOptions(new_choice_allow);
+		
 	}
 	else {
 		s_list.data('select2').dataAdapter.updateOptions(copy_choice_allow);
 	}
+	*/
+	var new_choice_allow = [];
+	for (var i = current_min-1; i < copy_choice_allow.length; i++) {
+		if (copy_choice_allow[i].id <= current_max) {
+			new_choice_allow.push(copy_choice_allow[i]);
+		}
+		else {
+			break;
+		}
+	}
+	s_list.data('select2').dataAdapter.updateOptions(new_choice_allow);
 }
 
 // For Image Part
@@ -178,6 +195,13 @@ function getUserData(id) {
 	return user_data[id];
 }
 
+// User Data Check
+function getUserUniqueData(id) {
+	if (typeof user_unique_data[id] === "undefined") {
+		return null;
+	}
+	return user_unique_data[id];
+}
 
 // Convert Data
 function ConvertUserDataToRawInput(input_data)
@@ -211,25 +235,46 @@ function memBerClick(id, name, s_element) {
 	// Mark current_edit
 	current_edit = id;
     var current_user_data = getUserData(id);
+    var current_user_unique_data = getUserUniqueData(id);
 	var current_edit_max = servants_data_list[id].maxcopy;
+	var current_edit_min = servants_data_list[id].mincopy;
+	var current_unique_enable = servants_data_list[id].unique;
 	// New Check or Update
 	if (current_user_data != null) {
 		// Select 2
-		getNewCopySource(current_edit_max, list_update);
+		getNewCopySource(current_edit_max, list_update, current_edit_min);
 		// Update Modal String
 		$('#nameUpdate').html(name);
 		// Reset Modal Choice to Current
 		$('#npUpdate').val(current_user_data).trigger('change');
+		// Reset Modal Choice to Current
+		if (current_unique_enable) {
+			$('#uniqueUpdate').prop('checked', current_user_unique_data);
+			document.getElementById('uniqueUpdateForm').style.display = "block";
+		} 
+		else {
+			$('#uniqueUpdate').prop('checked', current_user_unique_data);
+			document.getElementById('uniqueUpdateForm').style.display = "none";
+		}
 		// Show Update Check Modal
 		$('#updateModal').modal('show');
 	}
 	else {
 		// Select 2
-		getNewCopySource(current_edit_max, list_new);
+		getNewCopySource(current_edit_max, list_new, current_edit_min);
 		// Update Modal String
 		$('#nameAdd').html(name);
 		// Reset Modal Choice to Default
-		$('#npAdd').val(copy_choice_default).trigger('change');
+		$('#npAdd').val(current_edit_min).trigger('change');
+		// Reset Modal Choice to Current
+		if (current_unique_enable) {
+			$('#uniqueAdd').prop('checked', false);
+			document.getElementById('uniqueAddForm').style.display = "block";
+		} 
+		else {
+			$('#uniqueAdd').prop('checked', false);
+			document.getElementById('uniqueAddForm').style.display = "none";
+		}
 		// Show New Check Modal
 		$('#addModal').modal('show');
 	}
@@ -263,11 +308,16 @@ function userDataRemove() {
         },
         callback: function (result) {
             if (result) {
-				// Get UserData
+				// Get User Data & User Unique Equipment Data
 				var current_user_data = getUserData(current_edit);
+				var current_user_unique_data = getUserUniqueData(current_edit);
 				// Delete User Data
 				if (current_user_data != null) {
 					delete user_data[current_edit];
+				}
+				// Delete User Unqiue Equipment Data
+				if (current_user_unique_data != null) {
+					delete user_unique_data[current_edit];
 				}
 				// Update Count
 				count_update(current_edit, -1);
@@ -304,6 +354,7 @@ function userDataUpdateFast(id, val, s_element) {
 	// Mark current_edit
     var current_user_data = getUserData(id);
 	var current_edit_max = servants_data_list[id].maxcopy;
+	var current_edit_min = servants_data_list[id].mincopy;
 	// Prevent Over Data
 	if (current_edit_max > copy_choice_max) {
 		current_edit_max = copy_choice_max;
@@ -322,6 +373,7 @@ function userDataUpdateFast(id, val, s_element) {
 			count_update(id, -1);
 			// Clear Number
 			delete user_data[id];
+			delete user_unqiue_data[id];
 		}
 		else {
 			// Update user data
@@ -334,6 +386,7 @@ function userDataUpdateFast(id, val, s_element) {
 		if (val <= 0) {
 			// Add user data
 			user_data[id] = current_edit_max;
+			user_unique_data[id] = false;
 			// Update Member Element
 			$('#' + id).addClass(member_class_checked);
 			// Update Value on List
@@ -341,9 +394,11 @@ function userDataUpdateFast(id, val, s_element) {
 		}
 		else {
 			// Add user data
-			user_data[id] = 1;
+			user_data[id] = current_edit_min;
+			user_unique_data[id] = false;
 			// Update Count
 			count_update(id, 1);
+			UpdateCopyVal(id, current_edit_min);
 			// Update Member Element
 			$('#' + id).addClass(member_class_checked);
 		}
@@ -360,12 +415,18 @@ function userDataUpdate() {
 	}
 	// Get UserData
 	var current_user_data = getUserData(current_edit);
+	// Get User Unique Equipment Data
+	var current_user_unique_data = getUserUniqueData(current_edit);
+
 	// New Check or Update
 	if (current_user_data != null) {
 		// Get New Value
 		var new_val = parseInt($('#npUpdate').val());
+		var new_uq = $('#uniqueUpdate').is(':checked');
 		// Update user data
 		user_data[current_edit] = new_val;
+		// Update user unique equipment data
+		user_unique_data[current_edit] = new_uq;
 		// Update Value on List
 		UpdateCopyVal(current_edit, new_val);
 		// Hide Update Check Modal
@@ -376,8 +437,11 @@ function userDataUpdate() {
 		var current_edit_eventonly = servants_data_list[current_edit].eventonly;
 		// Get New Value
 		var new_val = parseInt($('#npAdd').val());
+		var new_uq = $('#uniqueAdd').is(':checked');
 		// Add user data
 		user_data[current_edit] = new_val;
+		// Add user unique data
+		user_unique_data[current_edit] = new_uq;
 		// Update Count
 		count_update(current_edit, 1);
 		// Update Member Element
@@ -399,9 +463,17 @@ function UpdateCopyVal(id, new_val) {
 	if (id == "") {
 		return;
 	}
+	var current_user_unique_data = getUserUniqueData(current_edit);
+	if (current_user_unique_data){
+		document.getElementById(unique_prefix + id).style.display = "inline-block";
+	}
+	else
+	{
+		document.getElementById(unique_prefix + id).style.display = "none";
+	}
 	// Update Value on List
-	if (new_val > 1) {
-		$('#' + morecopy_prefix + id).html(morecopy_text + new_val.toString());
+	if (new_val >= 1) {
+		$('#' + morecopy_prefix + id).html(morecopy_text.repeat(new_val.toString()));
 	}
 	else {
 		$('#' + morecopy_prefix + id).html("");
@@ -418,8 +490,10 @@ function getFastModeURLstring() {
 function UpdateURL() {
 	// Sort Key First
 	user_data = orderKeys(user_data);
+	user_unique_data = orderKeys(user_unique_data);
 	// Update Raw Input & URL
 	raw_user_input = ConvertUserDataToRawInput(user_data);
+	raw_user_input_unique = ConvertUserDataToRawInput(user_unique_data);
 	var new_parameter = "";
 	// User Data
 	if (raw_user_input != "") {
@@ -430,12 +504,8 @@ function UpdateURL() {
 			new_parameter += "&";
 		}
 		// Compress
-		compress_input = LZString.compressToEncodedURIComponent(raw_user_input);
-		// Debug : Compressed Size Reduce //
-		var decraese_len = raw_user_input.length - compress_input.length;
-		console.log("Raw Size: " + raw_user_input.length);
-		console.log("Compressed Size: " + compress_input.length);
-		console.log("Compressed Size Reduce: " + decraese_len);
+		compress_input = LZString.compressToEncodedURIComponent(raw_user_input+"|"+raw_user_input_unique);
+
 		// Put Param
 		new_parameter += compress_input_parameter + "=" + compress_input;
 		// Button
@@ -445,6 +515,8 @@ function UpdateURL() {
 		compress_input = null;
 		$('#' + save_btn).prop('disabled', true);
 	}
+
+
 	// Fast Mode
 	var fastmode_str = getFastModeURLstring();
 	if (fastmode_str != "") {
@@ -558,6 +630,7 @@ function MakeData(servants_data) {
 			servants_data_list[current_servant.id].eventonly = current_type.eventonly; 
 			// Prepare
 			var current_user_data = getUserData(current_servant.id);
+			var current_user_unique_data = getUserUniqueData(current_servant.id);
             var current_servant_html = '<div class="' + member_class_grid + '"><div';
             var current_servant_class = ' class="' + member_class;
             var current_servant_img = '';
@@ -608,13 +681,22 @@ function MakeData(servants_data) {
             }
             current_servant_html += '<img src="' + current_servant_img + '" class="' + img_class + '"/>';
             // Multiple Copy + Event Only Tag
-            current_servant_html += '<div id="' + morecopy_prefix + current_servant.id + '" class="' + morecopy_class + '">';
+			current_servant_html += '<div id="' + morecopy_prefix + current_servant.id + '" class="' + morecopy_class + '">';
 			if (current_user_data != null) {
 				if (current_user_data > 1) {
-					current_servant_html += morecopy_text + current_user_data.toString();
+					current_servant_html += morecopy_text.repeat(current_user_data.toString());
 				}
 			}
-            current_servant_html += '</div>';
+			current_servant_html += '</div>';
+		
+			//Add Unique Equipment Icon
+			if(current_user_unique_data == "true") {
+				current_servant_html += '<div id="' + unique_prefix + current_servant.id + '" class="' + unique_class + '" style="display : inline-block;">⚔</div>';
+				//current_servant_html += '<div id="' + unique_prefix + current_servant.id + '" class="' + unique_class + '" style="display : inline-block;"><i class="ra ra-relic-blade"></i></div>';
+			} else {
+				current_servant_html += '<div id="' + unique_prefix + current_servant.id + '" class="' + unique_class + '">⚔</div>';
+				//current_servant_html += '<div id="' + unique_prefix + current_servant.id + '" class="' + unique_class + '"><i class="ra ra-relic-blade"></i></div>';
+			}
 			if (current_type.show) {
 				current_servant_html += '<div class="' + servant_type_box_class + ' ' + current_type.class + '">'
 				current_servant_html += current_type.ctext + '</div>';
@@ -691,8 +773,9 @@ function ClearAllData() {
 				// Remove all checked Element
 				$('div.' + member_class_checked +' > div.' + morecopy_class).html('');
 				$('div.' + member_class_checked).removeClass(member_class_checked);
-				// Clear User Data
+				// Clear User Data & User Unique Data
 				user_data = {};
+				user_unique_data = {};
 				// Update Raw Input & URL
 				UpdateURL();
 			}
@@ -722,7 +805,7 @@ function ExportCanvas() {
 					var alink = document.createElement('a');
 					// toDataURL defaults to png, so we need to request a jpeg, then convert for file download.
 					alink.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
-					alink.download = 'fgo-checklist.jpg';
+					alink.download = 'pcon-checklist.jpg';
 					//Firefox requires the link to be in the body
 					document.body.appendChild(alink);
 					alink.click();
@@ -755,7 +838,11 @@ function loadLocalData() {
 				$('#loadingModal').modal('show');
 				// Load List
 				compress_input = localStorage[list_local];
-				raw_user_input = LZString.decompressFromEncodedURIComponent(compress_input);
+				var tmp_raw_user_input = LZString.decompressFromEncodedURIComponent(compress_input).split("|");
+				raw_user_input = tmp_raw_user_input[0];
+				if (tmp_raw_user_input.length > 1) {
+					raw_user_input_unique = tmp_raw_user_input[1];
+				}
 				// Update HTML
 				finish_loading();
 				// Alert
@@ -854,7 +941,12 @@ $(document).ready(function() {
 	// Load From URL
 	if (compress_input != null) {
 		// List Reader
-		raw_user_input = LZString.decompressFromEncodedURIComponent(compress_input);
+		var tmp_raw_user_input = LZString.decompressFromEncodedURIComponent(compress_input).split("|");
+		raw_user_input = tmp_raw_user_input[0];
+		//List Unique Reader
+		if(tmp_raw_user_input.length > 1) {
+			raw_user_input_unique = tmp_raw_user_input[1];
+		}
 		// Finish Loading
 		finish_loading();
 	}
@@ -873,6 +965,7 @@ $(document).ready(function() {
 			else {
 				// Blank Raw
 				raw_user_input = "";
+				raw_user_input_unique = "";
 				// Finish Loading
 				finish_loading();
 			}
@@ -895,6 +988,16 @@ function finish_loading() {
         var current_split = array_input[ii].split(">");
 		if (current_split[0] != "" && current_split[1] != "") {
 			user_data[current_split[0]] = parseInt(current_split[1]);
+			//user_unique_data[current_split[0]] = false;
+		}
+	}
+	
+	// Convert User Unique Data from Input
+	var array_input_uq = raw_user_input_unique.split(",");
+    for (var ij = 0, lj = array_input_uq.length; ij < lj; ij++) {
+		var current_split_uq = array_input_uq[ij].split(">");
+		if (current_split_uq[0] != "" && current_split_uq[1] != "") {
+			user_unique_data[current_split_uq[0]] = current_split_uq[1];
 		}
     }
 	// Update URL
