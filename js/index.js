@@ -353,6 +353,7 @@ function count_update(id, val) {
 function userDataUpdateFast(id, val, s_element) {
 	// Mark current_edit
     var current_user_data = getUserData(id);
+    var current_user_unique_data = getUserUniqueData(id);
 	var current_edit_max = servants_data_list[id].maxcopy;
 	var current_edit_min = servants_data_list[id].mincopy;
 	// Prevent Over Data
@@ -368,16 +369,17 @@ function userDataUpdateFast(id, val, s_element) {
 			// Update Member Element
 			$('#' + id).removeClass(member_class_checked);
 			// Update Value on List
+			delete user_unique_data[id];
 			UpdateCopyVal(id, 0);
 			// Update Count
 			count_update(id, -1);
 			// Clear Number
 			delete user_data[id];
-			delete user_unqiue_data[id];
 		}
 		else {
 			// Update user data
 			user_data[id] = new_val;
+			user_unique_data[id] = current_user_unique_data;
 			// Update Value on List
 			UpdateCopyVal(id, new_val);
 		}
@@ -463,8 +465,8 @@ function UpdateCopyVal(id, new_val) {
 	if (id == "") {
 		return;
 	}
-	var current_user_unique_data = getUserUniqueData(current_edit);
-	if (current_user_unique_data){
+	var current_user_unique_data = getUserUniqueData(id);
+	if (String(current_user_unique_data) == "true"){
 		document.getElementById(unique_prefix + id).style.display = "inline-block";
 	}
 	else
@@ -690,7 +692,7 @@ function MakeData(servants_data) {
 			current_servant_html += '</div>';
 		
 			//Add Unique Equipment Icon
-			if(current_user_unique_data == "true") {
+			if(String(current_user_unique_data) == "true") {
 				current_servant_html += '<div id="' + unique_prefix + current_servant.id + '" class="' + unique_class + '" style="display : inline-block;">⚔</div>';
 				//current_servant_html += '<div id="' + unique_prefix + current_servant.id + '" class="' + unique_class + '" style="display : inline-block;"><i class="ra ra-relic-blade"></i></div>';
 			} else {
