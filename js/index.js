@@ -26,7 +26,7 @@ var copy_choice_allow = [
 ];
 var copy_choice_default = 1;
 var copy_choice_max = 5;
-var share_tags = "PCON,Princess Connect Re:Dive";
+var share_tags = "プリコネ,プリコネR,プリンセスコネクト,";
 var share_title = "See My Characters Here!!";
 
 // Servant Type
