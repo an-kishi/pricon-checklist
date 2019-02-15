@@ -315,6 +315,16 @@
 				"unique": false,
 				"img": true,
 				"imgpath": "https://i.imgur.com/wBRrz4k.png"
+			},
+			{
+				"id": "3-32",
+				"name": "Muimi",
+				"maxcopy": 5,
+				"mincopy": 3,
+				"stype": 2,
+				"unique": false,
+				"img": true,
+				"imgpath": "https://i.imgur.com/NhhX6zh.png"
 			}
 		]
 	},
