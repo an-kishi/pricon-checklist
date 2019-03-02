@@ -12,7 +12,7 @@
 				"maxcopy": 5,
 				"mincopy": 3,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/jrKgJIm.png"
 			},
@@ -22,7 +22,7 @@
 				"maxcopy": 5,
 				"mincopy": 3,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/War2PGt.png"
 			},
@@ -325,6 +325,16 @@
 				"unique": false,
 				"img": true,
 				"imgpath": "https://i.imgur.com/NhhX6zh.png"
+			},
+			{
+				"id": "3-33",
+				"name": "Kasumi",
+				"maxcopy": 5,
+				"mincopy": 3,
+				"stype": 0,
+				"unique": false,
+				"img": true,
+				"imgpath": "https://i.imgur.com/XQurcbq.png"
 			}
 		]
 	},
@@ -401,7 +411,7 @@
 				"maxcopy": 5,
 				"mincopy": 2,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/5LmVMVG.png"
 			},
@@ -421,7 +431,7 @@
 				"maxcopy": 5,
 				"mincopy": 2,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/qN60WUe.png"
 			},
@@ -491,7 +501,7 @@
 				"maxcopy": 5,
 				"mincopy": 2,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/bqJHHLJ.png"
 			},
@@ -620,7 +630,7 @@
 				"maxcopy": 5,
 				"mincopy": 1,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/GsMVoX5.png"
 			},
