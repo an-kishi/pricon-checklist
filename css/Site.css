@@ -116,8 +116,8 @@ div.member-eventonly {
 div.member-uniquewp {
     display: none;
     position: absolute;
-    bottom: 5%;
-    left: 10%;
+    top: 5%;
+    right: 10%;
 	/*color: purple;*/
 	text-shadow:1px 1px 10px #000, 1px 1px 10px #ccc;
     font-size: 1vw;
