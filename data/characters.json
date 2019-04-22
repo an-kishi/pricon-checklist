@@ -345,6 +345,16 @@
 				"unique": false,
 				"img": true,
 				"imgpath": "https://i.imgur.com/JUEaasz.png"
+			},
+			{
+				"id": "3-35",
+				"name": "Grea",
+				"maxcopy": 5,
+				"mincopy": 3,
+				"stype": 0,
+				"unique": false,
+				"img": true,
+				"imgpath": "https://i.imgur.com/CjE9FtY.png"
 			}
 		]
 	},
