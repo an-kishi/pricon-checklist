@@ -32,7 +32,7 @@
 				"maxcopy": 5,
 				"mincopy": 3,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/AFA75LD.png"
 			},
@@ -102,7 +102,7 @@
 				"maxcopy": 5,
 				"mincopy": 3,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/HpK3ia9.png"
 			},
@@ -355,6 +355,16 @@
 				"unique": false,
 				"img": true,
 				"imgpath": "https://i.imgur.com/CjE9FtY.png"
+			},
+			{
+				"id": "3-36",
+				"name": "Kuuka (Oedo)",
+				"maxcopy": 5,
+				"mincopy": 3,
+				"stype": 0,
+				"unique": false,
+				"img": true,
+				"imgpath": "https://i.imgur.com/e9Sehcw.png"
 			}
 		]
 	},
@@ -371,7 +381,7 @@
 				"maxcopy": 5,
 				"mincopy": 2,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/369MSVo.png"
 			},
@@ -391,7 +401,7 @@
 				"maxcopy": 5,
 				"mincopy": 2,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/r4XfVF5.png"
 			},
@@ -531,7 +541,7 @@
 				"maxcopy": 5,
 				"mincopy": 2,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/Jo1x461.png"
 			},
@@ -670,7 +680,7 @@
 				"maxcopy": 5,
 				"mincopy": 1,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/KlXB6wR.png"
 			},
