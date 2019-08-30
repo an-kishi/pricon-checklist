@@ -687,7 +687,8 @@ function MakeData(servants_data) {
 			current_servant_html += '<div id="' + morecopy_prefix + current_servant.id + '" class="' + morecopy_class + '">';
 			if (current_user_data != null) {
 				if (current_user_data > 1) {
-					current_servant_html += morecopy_text.repeat(current_user_data.toString());
+					//current_servant_html += morecopy_text.repeat(current_user_data.toString());
+					current_servant_html += morecopy_text+current_user_data.toString();
 				}
 			}
 			current_servant_html += '</div>';
