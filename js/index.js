@@ -476,7 +476,8 @@ function UpdateCopyVal(id, new_val) {
 	}
 	// Update Value on List
 	if (new_val >= 1) {
-		$('#' + morecopy_prefix + id).html(morecopy_text.repeat(new_val.toString()));
+		//$('#' + morecopy_prefix + id).html(morecopy_text.repeat(new_val.toString()));
+		$('#' + morecopy_prefix + id).html(morecopy_text+new_val.toString());
 	}
 	else {
 		$('#' + morecopy_prefix + id).html("");
