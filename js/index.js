@@ -18,14 +18,15 @@ var morecopy_text = "★";
 var morecopy_class = "member-np";
 var morecopy_prefix = "np_";
 var copy_choice_allow = [
-	{ "id": 1, "text": "★" },
-	{ "id": 2, "text": "★★" },
-	{ "id": 3, "text": "★★★" },
-	{ "id": 4, "text": "★★★★" },
-	{ "id": 5, "text": "★★★★★" }
+	{ "id": 1, "text": "1★" },
+	{ "id": 2, "text": "2★" },
+	{ "id": 3, "text": "3★" },
+	{ "id": 4, "text": "4★" },
+	{ "id": 5, "text": "5★" },
+	{ "id": 6, "text": "6★" }
 ];
 var copy_choice_default = 1;
-var copy_choice_max = 5;
+var copy_choice_max = 6;
 var share_tags = "プリコネ,プリコネR,プリンセスコネクト,";
 var share_title = "See My Characters Here!!";
 
