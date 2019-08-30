@@ -142,7 +142,7 @@
 				"maxcopy": 5,
 				"mincopy": 3,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/c7At0VD.png"
 			},
@@ -162,7 +162,7 @@
 				"maxcopy": 5,
 				"mincopy": 3,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/G9hHOlk.png"
 			},
@@ -172,7 +172,7 @@
 				"maxcopy": 5,
 				"mincopy": 3,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/YFT2GJe.png"
 			},
@@ -182,7 +182,7 @@
 				"maxcopy": 5,
 				"mincopy": 3,
 				"stype": 2,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/d42rHGL.png"
 			},
@@ -192,7 +192,7 @@
 				"maxcopy": 5,
 				"mincopy": 3,
 				"stype": 2,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/eruaj5a.png"
 			},
@@ -202,7 +202,7 @@
 				"maxcopy": 5,
 				"mincopy": 3,
 				"stype": 2,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/HTMpHyM.png"
 			},
@@ -212,7 +212,7 @@
 				"maxcopy": 5,
 				"mincopy": 3,
 				"stype": 2,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/QcLuhW5.png"
 			},
@@ -262,7 +262,7 @@
 				"maxcopy": 5,
 				"mincopy": 3,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/rZcHU3V.png"
 			},
@@ -332,7 +332,7 @@
 				"maxcopy": 5,
 				"mincopy": 3,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/XQurcbq.png"
 			},
@@ -365,6 +365,86 @@
 				"unique": false,
 				"img": true,
 				"imgpath": "https://i.imgur.com/e9Sehcw.png"
+			},
+			{
+				"id": "3-37",
+				"name": "Ninon (Oedo)",
+				"maxcopy": 5,
+				"mincopy": 3,
+				"stype": 0,
+				"unique": false,
+				"img": true,
+				"imgpath": "https://i.imgur.com/q1vqOtq.png"
+			},
+			{
+				"id": "3-38",
+				"name": "Rem",
+				"maxcopy": 5,
+				"mincopy": 3,
+				"stype": 2,
+				"unique": false,
+				"img": true,
+				"imgpath": "https://i.imgur.com/YZI22aV.png"
+			},
+			{
+				"id": "3-39",
+				"name": "Emilia",
+				"maxcopy": 5,
+				"mincopy": 3,
+				"stype": 2,
+				"unique": false,
+				"img": true,
+				"imgpath": "https://i.imgur.com/pA1zD7S.png"
+			},
+			{
+				"id": "3-40",
+				"name": "Suzuna (Swimsuit)",
+				"maxcopy": 5,
+				"mincopy": 3,
+				"stype": 2,
+				"unique": false,
+				"img": true,
+				"imgpath": "https://i.imgur.com/Za7J40l.png"
+			},
+			{
+				"id": "3-41",
+				"name": "Saren (Swimsuit)",
+				"maxcopy": 5,
+				"mincopy": 3,
+				"stype": 2,
+				"unique": false,
+				"img": true,
+				"imgpath": "https://i.imgur.com/BlaDXbw.png"
+			},
+			{
+				"id": "3-42",
+				"name": "Makoto (Swimsuit)",
+				"maxcopy": 5,
+				"mincopy": 3,
+				"stype": 2,
+				"unique": false,
+				"img": true,
+				"imgpath": "https://i.imgur.com/KKdbHfc.png"
+			},
+			{
+				"id": "3-43",
+				"name": "Maho (Swimsuit)",
+				"maxcopy": 5,
+				"mincopy": 3,
+				"stype": 2,
+				"unique": false,
+				"img": true,
+				"imgpath": "https://i.imgur.com/VBI1dME.png"
+			},
+			{
+				"id": "3-44",
+				"name": "Neneka",
+				"maxcopy": 5,
+				"mincopy": 3,
+				"stype": 2,
+				"unique": false,
+				"img": true,
+				"imgpath": "https://i.imgur.com/TbZdvAY.png"
 			}
 		]
 	},
@@ -431,7 +511,7 @@
 				"maxcopy": 5,
 				"mincopy": 2,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/Q12wPYh.png"
 			},
@@ -471,7 +551,7 @@
 				"maxcopy": 5,
 				"mincopy": 2,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/FYjrjjq.png"
 			},
@@ -501,7 +581,7 @@
 				"maxcopy": 5,
 				"mincopy": 2,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/1d3HNNy.png"
 			},
@@ -521,7 +601,7 @@
 				"maxcopy": 5,
 				"mincopy": 2,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/K0TV2rp.png"
 			},
@@ -561,7 +641,7 @@
 				"maxcopy": 5,
 				"mincopy": 2,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/UXHICkl.png"
 			},
@@ -581,7 +661,7 @@
 				"maxcopy": 5,
 				"mincopy": 2,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/dME53c6.png"
 			}
@@ -637,7 +717,7 @@
 			{
 				"id": "1-05",
 				"name": "Kokoro",
-				"maxcopy": 5,
+				"maxcopy": 6,
 				"mincopy": 1,
 				"stype": 0,
 				"unique": true,
@@ -650,7 +730,7 @@
 				"maxcopy": 5,
 				"mincopy": 1,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/PAGzVzP.png"
 			},
@@ -667,7 +747,7 @@
 			{
 				"id": "1-08",
 				"name": "Kyaru",
-				"maxcopy": 5,
+				"maxcopy": 6,
 				"mincopy": 1,
 				"stype": 0,
 				"unique": true,
@@ -700,7 +780,7 @@
 				"maxcopy": 5,
 				"mincopy": 1,
 				"stype": 0,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/qdNBQhb.png"
 			},
@@ -717,7 +797,7 @@
 			{
 				"id": "1-13",
 				"name": "Pecorine",
-				"maxcopy": 5,
+				"maxcopy": 6,
 				"mincopy": 1,
 				"stype": 0,
 				"unique": true,
@@ -740,7 +820,7 @@
 				"maxcopy": 5,
 				"mincopy": 1,
 				"stype": 3,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/42i5UmI.png"
 			},
@@ -750,7 +830,7 @@
 				"maxcopy": 5,
 				"mincopy": 1,
 				"stype": 3,
-				"unique": false,
+				"unique": true,
 				"img": true,
 				"imgpath": "https://i.imgur.com/c43Q8Ra.png"
 			},
@@ -813,6 +893,36 @@
 				"unique": false,
 				"img": true,
 				"imgpath": "https://i.imgur.com/1l6RIFj.png"
+			},
+			{
+				"id": "1-23",
+				"name": "Ram",
+				"maxcopy": 5,
+				"mincopy": 1,
+				"stype": 3,
+				"unique": false,
+				"img": true,
+				"imgpath": "https://i.imgur.com/RxKB3KU.png"
+			},
+			{
+				"id": "1-24",
+				"name": "Io (Swimsuit)",
+				"maxcopy": 5,
+				"mincopy": 1,
+				"stype": 3,
+				"unique": false,
+				"img": true,
+				"imgpath": "https://i.imgur.com/5Ch3qv0.png"
+			},
+			{
+				"id": "1-25",
+				"name": "Kaori (Swimsuit)",
+				"maxcopy": 5,
+				"mincopy": 1,
+				"stype": 3,
+				"unique": false,
+				"img": true,
+				"imgpath": "https://i.imgur.com/MZUC3qn.png"
 			}
 		]
 	}
