@@ -455,6 +455,16 @@
 				"unique": false,
 				"img": true,
 				"imgpath": "https://i.imgur.com/kynVZTv.png"
+			},
+			{
+				"id": "3-46",
+				"name": "Chloe",
+				"maxcopy": 5,
+				"mincopy": 3,
+				"stype": 2,
+				"unique": false,
+				"img": true,
+				"imgpath": "https://imgur.com/11PaxGE.png"
 			}
 		]
 	},
